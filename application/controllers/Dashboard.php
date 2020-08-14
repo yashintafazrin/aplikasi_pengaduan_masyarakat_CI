@@ -13,7 +13,9 @@ Class Dashboard extends CI_Controller{
 
     public function register(){
         $data['title'] = "Register";
-        $this->load->view('register',$data);
+        $data['petugas'] = $this->modelsistem->get_petugas();
+        $data['c_petugas'] = $this->modelsistem->count_petugas();
+        $this->load->view('registrasi',$data);
     }
 
     public function menulis_laporan(){
@@ -34,6 +36,16 @@ Class Dashboard extends CI_Controller{
     public function cek_tanggapanms(){
         $data['title'] = "Cek Tanggapan";
         $this->load->view('cek_tanggapanms',$data);
+    }
+	
+	public function simpan_data(){
+        $this->modelsistem->simpan_db();
+
+    }
+
+    public function __construct(){
+        parent::__construct();
+        $this->load->model('modelsistem');
     }
 
     
